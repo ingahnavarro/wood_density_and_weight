@@ -160,7 +160,7 @@ def create_contour_plot(x, y, z, xlabel, ylabel, title, colorbar_label, scatter_
         marker="o",
         s=100,
     )
-    fig.set_size_inches(fig.get_size_inches() * 0.25)
+    fig.set_size_inches(fig.get_size_inches() * 0.50)
     return fig
 
 
