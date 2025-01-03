@@ -82,11 +82,11 @@ class WeightCalculator:
             - Density of water is 1000 kg/m^3.
         """
         if not isinstance(moisture_content, (int, float)):
-            raise TypeError("Moisture content must be a number (int or float)") # Errores: Added exception comment.
+            raise TypeError("Moisture content must be a number (int or float)")
         if moisture_content < 0:
-            raise ValueError("Moisture content must be non-negative.") # Errores: Added exception comment.
+            raise ValueError("Moisture content must be non-negative.")
         if self.material.fibre_saturation_point < 0:
-            raise ValueError("Fiber saturation point must be non-negative.") # Errores: Added exception comment.
+            raise ValueError("Fiber saturation point must be non-negative.")
 
         if moisture_content > self.material.fibre_saturation_point:
             density_at_moisture = (
@@ -126,15 +126,15 @@ class WeightCalculator:
            - The provided dimensions are valid (positive).
         """
         if not isinstance(moisture_content, (int, float)):
-            raise TypeError("Moisture content must be a number (int or float)") # Errores: Added exception comment.
+            raise TypeError("Moisture content must be a number (int or float)")
         if moisture_content < 0:
-            raise ValueError("Moisture content must be non-negative.") # Errores: Added exception comment.
+            raise ValueError("Moisture content must be non-negative.")
         if (
             self.element.width < 0
             or self.element.depth < 0
             or self.element.length < 0
         ):
-            raise ValueError("Element dimensions must be non-negative values.") # Errores: Added exception comment.
+            raise ValueError("Element dimensions must be non-negative values.")
 
         volume = self.element.width * self.element.depth * self.element.length
         density = self.calculate_density_at_moisture_content(moisture_content)
@@ -143,16 +143,16 @@ class WeightCalculator:
 
 
 def create_contour_plot(x, y, z, xlabel, ylabel, title, colorbar_label, scatter_x,
-                        scatter_y):  # Mejora: create a function for reuse
-    fig, ax = plt.subplots(figsize=(6, 5)) # Mejora: Set a larger figure size for better visualization.
+                        scatter_y):
+    fig, ax = plt.subplots(figsize=(6, 5))
     contour = ax.contourf(x, y, z, cmap="viridis")
-    ax.set_xlabel(xlabel, fontsize=8)  # Mejora: Set the font size for xlabel.
-    ax.set_ylabel(ylabel, fontsize=8)  # Mejora: Set the font size for ylabel.
-    ax.set_title(title, fontsize=10)  # Mejora: Set the font size for title.
-    cbar = fig.colorbar(contour, label=colorbar_label) # Mejora: save colorbar in variable to change font size
-    cbar.ax.tick_params(labelsize=8) # Mejora: Set the font size for colorbar labels.
-    cbar.set_label(colorbar_label, fontsize=8)  # Mejora: Set the font size for colorbar label
-    ax.tick_params(axis='both', which='major', labelsize=6)  # Mejora: Set the font size for axis ticks
+    ax.set_xlabel(xlabel, fontsize=8)
+    ax.set_ylabel(ylabel, fontsize=8)
+    ax.set_title(title, fontsize=10)
+    cbar = fig.colorbar(contour, label=colorbar_label)
+    cbar.ax.tick_params(labelsize=8)
+    cbar.set_label(colorbar_label, fontsize=8)
+    ax.tick_params(axis='both', which='major', labelsize=6)
     ax.scatter(
         scatter_x,
         scatter_y,
@@ -160,7 +160,7 @@ def create_contour_plot(x, y, z, xlabel, ylabel, title, colorbar_label, scatter_
         marker="o",
         s=100,
     )
-    fig.set_size_inches(fig.get_size_inches() * 0.60) # Mejora: Scale the plot to 85% of its original size.
+    fig.set_size_inches(fig.get_size_inches() * 0.60)
     return fig
 
 
@@ -170,7 +170,7 @@ def main():
         layout="wide",
         page_icon="🪵",
     )
-    st.title("Calculadora de Densidad y Peso de Madera")
+    st.title("Calculadora de Densidad y Peso de una Pieza de Madera")
 
     st.header("Propiedades de la Madera")
     wood_name = st.text_input("Nombre de la Madera", "Pino amarillo del sur")
@@ -268,7 +268,7 @@ def main():
                         label="",
                         value=f"{weight_point:.2f} kg",
                     )
-            with tab2:  # Mejora: Restructure the plot creation to use a function for reuse
+            with tab2:
 
                 moisture_range = np.linspace(0, 40, 100)
                 specific_gravity_range = np.linspace(0.4, 1.0, 100)
@@ -338,9 +338,9 @@ def main():
                 st.pyplot(st.session_state.fig2)
 
         except ValueError as e:
-            st.error(f"Error: {e}")  # Errores: Added exception comment.
+            st.error(f"Error: {e}")
         except TypeError as e:
-            st.error(f"Error: {e}")  # Errores: Added exception comment.
+            st.error(f"Error: {e}")
 
     if st.session_state.tab_selection == "Gráfico de Densidad":
         st.session_state.tab_selection = "Gráfico de Densidad"
