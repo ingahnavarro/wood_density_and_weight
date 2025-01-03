@@ -117,14 +117,14 @@ class WeightCalculator:
             - The moisture content is given as a percentage (e.g., 12.5 for 12.5%).
             - Density of water is 1000 kg/m^3
         """
-        if not isinstance(moisture_content, (int, float)): #Errores: Added validation for moisture_content type
+        if not isinstance(moisture_content, (int, float)):
             raise TypeError("Moisture content must be a number (int or float)")
-        if moisture_content < 0: #Errores: Added validation for moisture_content
+        if moisture_content < 0:
             raise ValueError("Moisture content must be non-negative.")
-        if self.material.fibre_saturation_point < 0: #Errores: Added validation for fibre saturation point
+        if self.material.fibre_saturation_point < 0:
              raise ValueError("Fibre saturation point must be non-negative.")
 
-        if moisture_content <= self.material.fibre_saturation_point: #Mejora: Changed the logic to consider fibre saturation point as the max density
+        if moisture_content <= self.material.fibre_saturation_point:
             density_at_moisture = (
                 self.material.specific_gravity
                 * 1000
@@ -135,7 +135,7 @@ class WeightCalculator:
                     + 1
                 )
             )
-        else: #Mejora: If moisture content is higher than fibre saturation point, density remains constant
+        else:
             density_at_moisture = (
                 self.material.specific_gravity
                 * 1000
@@ -165,14 +165,14 @@ class WeightCalculator:
            - The provided dimensions are valid (positive).
         """
 
-        if not isinstance(moisture_content, (int, float)): #Errores: Validate the type of the input
+        if not isinstance(moisture_content, (int, float)):
             raise TypeError("Moisture content must be a number (int or float)")
-        if moisture_content < 0:  #Errores: Add validation for moisture_content
+        if moisture_content < 0:
             raise ValueError("Moisture content must be non-negative.")
-        if self.element.width < 0 or self.element.depth < 0 or self.element.length < 0: #Errores: Added validation for attributes
+        if self.element.width < 0 or self.element.depth < 0 or self.element.length < 0:
             raise ValueError("Element dimensions must be non-negative values.")
 
-        volume = self.element.width * self.element.depth * self.element.length  #Claridad: Calculate volume
+        volume = self.element.width * self.element.depth * self.element.length
         density = self.calculate_density_at_moisture_content(moisture_content)
-        weight = volume * density #Claridad: Calculate the weight using the density
+        weight = volume * density
         return weight

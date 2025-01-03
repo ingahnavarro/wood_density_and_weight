@@ -49,9 +49,9 @@ def test_weight_calculator_invalid_moisture_content_value(example_material, exam
 @pytest.mark.parametrize(
     "invalid_width, invalid_depth, invalid_length",
     [
-        (-0.2, 0.05, 2.5),
-        (0.2, -0.05, 2.5),
-        (0.2, 0.05, -2.5),
+        (-0.05, 0.15, 2.0),
+        (0.05, -0.15, 2.0),
+        (0.05, 0.15, -2.0),
     ],
 )
 def test_weight_calculator_invalid_element_dimensions( #Claridad: Added descriptive name
