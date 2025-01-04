@@ -45,39 +45,6 @@ class ElementProperties:
     length: float
 
 
-import numpy as np
-
-
-class WoodProperties:
-    """
-    Represents the properties of a wood material.
-
-    Attributes:
-        specific_gravity: The specific gravity of the wood.
-        fibre_saturation_point: The fibre saturation point of the wood (%).
-    """
-
-    def __init__(self, specific_gravity: float, fibre_saturation_point: float):
-        self.specific_gravity = specific_gravity
-        self.fibre_saturation_point = fibre_saturation_point
-
-
-class ElementProperties:
-    """
-    Represents the properties of a structural element.
-
-    Attributes:
-        width: The width of the element.
-        depth: The depth of the element.
-        length: The length of the element.
-    """
-
-    def __init__(self, width: float, depth: float, length: float):
-        self.width = width
-        self.depth = depth
-        self.length = length
-
-
 class WeightCalculator:
     """
     Calculates the weight of a wood element considering moisture content.
