@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import numpy as np
 
+
 @dataclass
 class WoodProperties:
     """
@@ -64,7 +65,7 @@ class WeightCalculator:
 
     def __init__(
         self,
-        material: WoodProperties,
+        material: WoodMaterial,
         element: ElementProperties,
     ):
         self.material = material
@@ -89,7 +90,7 @@ class WeightCalculator:
         if moisture_content < 0:
             raise ValueError("Moisture content must be non-negative.")
         if self.material.fibre_saturation_point < 0:
-             raise ValueError("Fibre saturation point must be non-negative.")
+            raise ValueError("Fibre saturation point must be non-negative.")
 
         if moisture_content <= self.material.fibre_saturation_point:
             density_at_moisture = (
