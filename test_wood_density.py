@@ -54,7 +54,7 @@ def test_weight_calculator_invalid_moisture_content_value(example_material, exam
         (0.05, 0.15, -2.0),
     ],
 )
-def test_weight_calculator_invalid_element_dimensions( #Claridad: Added descriptive name
+def test_weight_calculator_invalid_element_dimensions(
     example_material, invalid_width, invalid_depth, invalid_length
 ):
     """
@@ -96,7 +96,7 @@ def test_weight_calculator_density_at_moisture_content_invalid_value(example_mat
         calculator.calculate_density_at_moisture_content(-5)
 
 
-def test_weight_calculator_density_at_moisture_content_invalid_saturation_point(example_element): #Mejora: Changed name to example for clarity
+def test_weight_calculator_density_at_moisture_content_invalid_saturation_point(example_element):
     """
     Test the density calculation with invalid fibre saturation point.
     """
