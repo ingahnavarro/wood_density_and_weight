@@ -97,7 +97,7 @@ class WeightCalculator:
         else:
             a = 0.0
 
-        return self.material.specific_gravity / (1 - 0.265 * a * self.material.specific_gravity) *  (1 + moisture_content / 100) * 1000
+        return (self.material.specific_gravity / (1 - 0.265 * a * self.material.specific_gravity)) *  (1 + moisture_content / 100) * 1000
 
     def calculate_weight_at_moisture_content(self, moisture_content: float) -> float:
         """
@@ -121,6 +121,5 @@ class WeightCalculator:
             raise ValueError("Element dimensions must be non-negative values.")
 
         volume = self.element.width * self.element.depth * self.element.length
-        density = self.calculate_density_at_moisture_content(moisture_content)
-        weight = volume * density
-        return weight
+        density = self.calculate_density_at_moisture_content(moisture_content) 
+        return volume * density
