@@ -173,9 +173,9 @@ def main():
     st.title("Calculadora de Densidad y Peso de una Pieza de Madera")
 
     st.header("Propiedades de la Madera")
-    wood_name = st.text_input("Nombre de la Madera", "Pino amarillo del sur")
+    wood_name = st.text_input("Nombre de la Madera", "Pino chileno")
     wood_specific_gravity = st.number_input(
-        "Gravedad Específica", min_value=0.0, value=0.55, step=0.5
+        "Gravedad Específica", min_value=0.0, value=0.50, step=0.5
     )
     wood_fibre_saturation_point = st.number_input(
         "Punto de Saturación de la Fibra (%)", value=30.0, step=0.5
@@ -187,7 +187,7 @@ def main():
         "Ancho (m)", min_value=0.0, value=0.05, step=0.025
     )
     element_depth = st.number_input(
-        "Profundidad (m)", min_value=0.0, value=0.15, step=0.025
+        "Profundidad (m)", min_value=0.0, value=0.125, step=0.025
     )
     element_length = st.number_input(
         "Largo (m)", min_value=0.0, value=2.50, step=0.05
