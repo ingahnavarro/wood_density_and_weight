@@ -175,25 +175,25 @@ def main():
     st.header("Propiedades de la Madera")
     wood_name = st.text_input("Nombre de la Madera", "Pino amarillo del sur")
     wood_specific_gravity = st.number_input(
-        "Gravedad Específica", min_value=0.0, value=0.55, step=0.01
+        "Gravedad Específica", min_value=0.0, value=0.55, step=0.5
     )
     wood_fibre_saturation_point = st.number_input(
-        "Punto de Saturación de la Fibra (%)", value=30.0, step=1.0
+        "Punto de Saturación de la Fibra (%)", value=30.0, step=0.5
     )
 
     st.header("Propiedades del Elemento (m)")
     element_name = st.text_input("Nombre del Elemento", "Pieza 1")
     element_width = st.number_input(
-        "Ancho (m)", min_value=0.0, value=0.05, step=0.01
+        "Ancho (m)", min_value=0.0, value=0.05, step=0.025
     )
     element_depth = st.number_input(
-        "Profundidad (m)", min_value=0.0, value=0.15, step=0.01
+        "Profundidad (m)", min_value=0.0, value=0.15, step=0.025
     )
     element_length = st.number_input(
-        "Largo (m)", min_value=0.0, value=2.50, step=0.1
+        "Largo (m)", min_value=0.0, value=2.50, step=0.05
     )
     moisture_point = st.number_input(
-        "Contenido de Humedad (%) para calcular", value=18.0, step=1.0
+        "Contenido de Humedad (%) para calcular", value=18.0, step=0.5
     )
 
     if "tab_selection" not in st.session_state:
