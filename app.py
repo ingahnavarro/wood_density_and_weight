@@ -195,9 +195,6 @@ def main():
     moisture_point = st.number_input(
         "Contenido de Humedad (%) para calcular", value=18.0, step=1.0
     )
-    specific_gravity_point = st.number_input(
-        "Gravedad Específica para calcular", value=wood_specific_gravity, step=0.01
-    )
 
     if "tab_selection" not in st.session_state:
         st.session_state.tab_selection = "Resumen"
@@ -239,7 +236,7 @@ def main():
             with tab1:
                 st.subheader("Resultados:")
                 wood_point = WoodProperties(
-                    wood_name, specific_gravity_point, wood_fibre_saturation_point
+                    wood_name, wood_specific_gravity, wood_fibre_saturation_point
                 )
                 calculator_point = WeightCalculator(wood_point, element)
                 density_point = calculator_point.calculate_density_at_moisture_content(
@@ -252,7 +249,7 @@ def main():
                 col1, col2 = st.columns(2)
                 with col1:
                     st.markdown(
-                        f"<div style='word-wrap: break-word;'>Densidad a {moisture_point}% de humedad y {specific_gravity_point} de gravedad específica:</div>",
+                        f"<div style='word-wrap: break-word;'>Densidad a {moisture_point}% de humedad y {wood_specific_gravity} de gravedad específica:</div>",
                         unsafe_allow_html=True,
                     )
                     st.metric(
@@ -261,7 +258,7 @@ def main():
                     )
                 with col2:
                     st.markdown(
-                        f"<div style='word-wrap: break-word;'>Peso a {moisture_point}% de humedad y {specific_gravity_point} de gravedad específica:</div>",
+                        f"<div style='word-wrap: break-word;'>Peso a {moisture_point}% de humedad y {wood_specific_gravity} de gravedad específica:</div>",
                         unsafe_allow_html=True,
                     )
                     st.metric(
@@ -299,7 +296,7 @@ def main():
                     "Densidad vs. Contenido de Humedad y Gravedad Específica",
                     "Densidad (kg/m³)",
                     moisture_point,
-                    specific_gravity_point,
+                    wood_specific_gravity,
                 )
                 st.pyplot(st.session_state.fig1)
 
@@ -333,7 +330,7 @@ def main():
                     "Peso vs. Contenido de Humedad y Gravedad Específica",
                     "Peso (kg)",
                     moisture_point,
-                    specific_gravity_point,
+                    wood_specific_gravity,
                 )
                 st.pyplot(st.session_state.fig2)
 
