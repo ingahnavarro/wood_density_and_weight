@@ -174,7 +174,7 @@ def main():
                     )
             with tab2:
 
-                moisture_range = np.linspace(0, 40, 100)
+                moisture_range = np.linspace(0, max(40, moisture_point), 100)
                 specific_gravity_range = np.linspace(0.3, 1.0, 100)
                 st.session_state.moisture_grid, st.session_state.specific_gravity_grid = np.meshgrid(
                     moisture_range, specific_gravity_range
