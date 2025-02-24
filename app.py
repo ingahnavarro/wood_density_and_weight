@@ -88,7 +88,7 @@ def main():
         "Punto de Saturación de la Fibra (%)", value=30.0, step=0.5
     )
 
-    st.header("Propiedades del Elemento (m)")
+    st.header("Propiedades del Elemento")
     element_name = st.text_input("Nombre del Elemento", "Pieza 1")
     element_width = st.number_input(
         "Ancho (m)", min_value=0.0, value=0.05, step=0.025
@@ -100,7 +100,7 @@ def main():
         "Largo (m)", min_value=0.0, value=2.50, step=0.05
     )
     moisture_point = st.number_input(
-        "Contenido de Humedad (%) para calcular", value=18.0, step=0.5
+        "Contenido de Humedad (%)", value=18.0, step=0.5
     )
 
     if "tab_selection" not in st.session_state:
