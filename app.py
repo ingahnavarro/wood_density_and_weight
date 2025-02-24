@@ -73,7 +73,7 @@ def create_contour_plot(x, y, z, xlabel, ylabel, title, colorbar_label, scatter_
 
 def main():
     st.set_page_config(
-        page_title="Calculadora de Densidad y Peso de una Pieza de Madera",
+        page_title="Calculadora de densidad y peso de una pieza de madera",
         layout="wide",
         page_icon="🪵",
     )
