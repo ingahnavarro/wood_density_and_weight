@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-import numpy as np
 
 
 @dataclass
@@ -98,7 +97,7 @@ class WeightCalculator:
         else:
             a = 1.0
 
-        return self.material.specific_gravity / (1 + 0.265 * a * self.material.specific_gravity) * 1000
+        return self.material.specific_gravity / (1 - 0.265 * a * self.material.specific_gravity) * 1000
 
     def calculate_weight_at_moisture_content(self, moisture_content: float) -> float:
         """
