@@ -65,7 +65,7 @@ class WeightCalculator:
 
     def __init__(
         self,
-        material: WoodMaterial,
+        material: WoodProperties,
         element: ElementProperties,
     ):
         self.material = material
