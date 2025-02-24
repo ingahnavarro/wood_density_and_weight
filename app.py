@@ -1,6 +1,8 @@
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
+import wood_density
+
 
 
 class WoodProperties:
@@ -46,101 +48,6 @@ class ElementProperties:
         self.width = width
         self.depth = depth
         self.length = length
-
-
-class WeightCalculator:
-    """
-    Calculates the weight of a wood element considering moisture content.
-
-    Args:
-        material: WoodProperties object.
-        element: ElementProperties object.
-
-    Returns:
-        None
-
-    Assumptions:
-       None
-    """
-
-    def __init__(self, material: WoodProperties, element: ElementProperties):
-        self.material = material
-        self.element = element
-
-    def calculate_density_at_moisture_content(self, moisture_content: float) -> float:
-        """
-        Calculates the density of the wood at a given moisture content.
-
-        Args:
-            moisture_content: The moisture content of the wood (%).
-
-        Returns:
-            The density of the wood (kg/m^3).
-
-        Assumptions:
-            - Moisture content is given as a percentage (e.g., 12.5 for 12.5%).
-            - Density of water is 1000 kg/m^3.
-        """
-        if not isinstance(moisture_content, (int, float)):
-            raise TypeError("Moisture content must be a number (int or float)")
-        if moisture_content < 0:
-            raise ValueError("Moisture content must be non-negative.")
-        if self.material.fibre_saturation_point < 0:
-            raise ValueError("Fiber saturation point must be non-negative.")
-
-        if moisture_content > self.material.fibre_saturation_point:
-            density_at_moisture = (
-                self.material.specific_gravity
-                * 1000
-                * ((self.material.fibre_saturation_point / 100) + 1)
-                / (
-                    (self.material.fibre_saturation_point / 100)
-                    * self.material.specific_gravity
-                    + 1
-                )
-            )
-        else:
-            density_at_moisture = (
-                self.material.specific_gravity
-                * 1000
-                * ((moisture_content / 100) + 1)
-                / (
-                    (self.material.fibre_saturation_point / 100)
-                    * self.material.specific_gravity
-                    + 1
-                )
-            )
-        return density_at_moisture
-
-    def calculate_weight_at_moisture_content(self, moisture_content: float) -> float:
-        """
-        Calculates the weight of the wood element at a given moisture content.
-
-        Args:
-            moisture_content: The moisture content of the wood (%).
-
-        Returns:
-            The weight of the wood element (kg).
-
-        Assumptions:
-           - The provided dimensions are valid (positive).
-        """
-        if not isinstance(moisture_content, (int, float)):
-            raise TypeError("Moisture content must be a number (int or float)")
-        if moisture_content < 0:
-            raise ValueError("Moisture content must be non-negative.")
-        if (
-            self.element.width < 0
-            or self.element.depth < 0
-            or self.element.length < 0
-        ):
-            raise ValueError("Element dimensions must be non-negative values.")
-
-        volume = self.element.width * self.element.depth * self.element.length
-        density = self.calculate_density_at_moisture_content(moisture_content)
-        weight = volume * density
-        return weight
-
 
 def create_contour_plot(x, y, z, xlabel, ylabel, title, colorbar_label, scatter_x,
                         scatter_y):
@@ -223,7 +130,7 @@ def main():
                 element_depth,
                 element_length,
             )
-            calculator = WeightCalculator(wood, element)
+            calculator = wood_density.WeightCalculator(wood, element)
 
             tab1, tab2, tab3 = st.tabs(["Resumen", "Gráfico de Densidad", "Gráfico de Peso"])
 
@@ -238,7 +145,7 @@ def main():
                 wood_point = WoodProperties(
                     wood_name, wood_specific_gravity, wood_fibre_saturation_point
                 )
-                calculator_point = WeightCalculator(wood_point, element)
+                calculator_point = wood_density.WeightCalculator(wood_point, element)
                 density_point = calculator_point.calculate_density_at_moisture_content(
                     moisture_point
                 )
@@ -276,7 +183,7 @@ def main():
                 st.session_state.density_results = np.array(
                     [
                         [
-                            WeightCalculator(
+                            wood_density.WeightCalculator(
                                 WoodProperties(
                                     wood_name, sg, wood_fibre_saturation_point
                                 ),
@@ -310,7 +217,7 @@ def main():
                 st.session_state.weight_results = np.array(
                     [
                         [
-                            WeightCalculator(
+                            wood_density.WeightCalculator(
                                 WoodProperties(
                                     wood_name, sg, wood_fibre_saturation_point
                                 ),
