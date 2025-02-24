@@ -95,7 +95,7 @@ class WeightCalculator:
             a = (self.material.fibre_saturation_point - moisture_content) / self.material.fibre_saturation_point
 
         else:
-            a = 1.0
+            a = 0.0
 
         return self.material.specific_gravity / (1 - 0.265 * a * self.material.specific_gravity) *  (1 + moisture_content / 100) * 1000
 
