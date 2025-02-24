@@ -93,31 +93,12 @@ class WeightCalculator:
             raise ValueError("Fibre saturation point must be non-negative.")
 
         if moisture_content <= self.material.fibre_saturation_point:
-            density_at_moisture = (
-                self.material.specific_gravity
-                * 1000
-                * ((moisture_content / 100) + 1)
-                / (
-                    (self.material.fibre_saturation_point / 100)
-                    * self.material.specific_gravity
-                    + 1
-                )
-            )
+            a = (self.material.fibre_saturation_point - moisture_content) / self.material.fibre_saturation_point
+
         else:
-            density_at_moisture = (
-                self.material.specific_gravity
-                * 1000
-                * (
-                    (self.material.fibre_saturation_point / 100)
-                    + 1
-                )
-                / (
-                    (self.material.fibre_saturation_point / 100)
-                    * self.material.specific_gravity
-                    + 1
-                )
-            )
-        return density_at_moisture
+            a = 1.0
+
+        return self.material.specific_gravity / (1 + 0.265 * a * self.material.specific_gravity)
 
     def calculate_weight_at_moisture_content(self, moisture_content: float) -> float:
         """
